@@ -461,10 +461,10 @@ def cancelTickets(eventId):
         db.session.delete(ticket)
     db.session.commit()
 
-#Initialise the database
+#Initialise the database with some random data
 def dbinit():
     #Add the superuser
-    superUser = User("Jack", "Bardoe", "jack.bardoe@warwick.ac.uk", security.generate_password_hash("Password"), [])
+    superUser = User("Jack", "Bardoe", "jack.bardoe@gmail.com", security.generate_password_hash("Password"), [])
     superUser.emailVerified = True
 
     db.session.add(superUser)
@@ -500,15 +500,4 @@ def dbinit():
     Event.query.filter_by(id = 5).first().cancel()
     
     db.session.commit()
-
-def test():
-    user = User.query.filter_by(id = 1).first()
-
-    qry = text("SELECT * FROM users WHERE id == :id")
-    qry = qry.bindparams(id = 1)
-    user1 = db.session.execute(qry).fetchall().first()
-
-    qry1 = "SELECT * FROM users WHERE id == :id"
-    param = {"id":1}
-    user2 = db.session.execute(qry, params).fetchall().first()
     
