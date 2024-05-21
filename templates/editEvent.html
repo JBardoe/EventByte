@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Edit Event</title>
+        <link rel="stylesheet" href="/static/css/layout.css" type="text/css">
+        <script src='/static/js/jquery-3.7.1.min.js'></script>
+        <script src='/static/js/events.js'></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    </head>
+    <body>
+        <div class="contentWrapper">
+            <!--Side navigation bar-->
+            <button class="openMenu" type="button" id="openMenu" onclick="openMenu();">&#9776;</button>
+            <div class="sideBar" id="menu">
+                <a class="closeMenu" onclick="closeMenu()">&times;</a>
+                <a class="navLink" href="/myEvents">My Events</a>
+                <a class="navLink" href="/allEvents">Upcoming Events</a>
+                <a class="navLink" href="/allEvents?past=True">Past Events</a>
+                <a class="navLink" href="/addEvent">Add Event</a>
+                <a class="navLink" href="/situationLog">Log</a>
+                <a class="navLink" href="/settings">Settings</a>
+                <a class="navLink" href="/logout">Logout</a>
+            </div>
+
+            <!-- Display the profile picture -->
+            <img class="pfp" alt="Profile Picture" src="{{ pfp }}" name="profilePicture" id="profilePicture">
+
+            <h2>Edit Event: {{ event.name }}</h2>
+
+            <!-- Display any error messages -->
+            {% for message in get_flashed_messages() %}
+                <p class="errorMessage">{{ message }}</p>
+            {% endfor %}
+
+            <!-- Form to submit any changes to the event. Current values are used as placeholders. -->
+            <div class="addEventForm">
+                <form action="editEvent?event={{ event.name }}" class="addEvent" method="POST" id="addEventForm">
+                    <label class="bigLabel">Event Start:</label><br>
+                    <label for="startHour">Hour:</label>
+                    <input type="number" name="startHour" id="startHour" class="addEventInput" min="0" max="23" placeholder="{{ event.start.hour }}">
+                    <label for="startMinutes">Minutes:</label>
+                    <input type="number" name="startMinutes" id="startMinutes" class="addEventInput" min="0" max="59" placeholder="{{ event.start.minute }}"><br>
+                    <label for="day">Day:</label>
+                    <input type="number" name="day" id="day" class="addEventInput" min="1" max="31" placeholder="{{ event.start.day }}">
+                    <label for="month">Month (1-12):</label>
+                    <input type="number" name="month" id="month" class="addEventInput" min="1" max="12" placeholder="{{ event.start.month }}">
+                    <label for="year">Year:</label>
+                    <input type="number" name="year" id="year" class="addEventInput" min="1967" placeholder="{{ event.start.year }}">
+
+                    <br>
+                    <label class="bigLabel">Duration (Max 48 hours):</label><br>
+                    <label for="durationHour">Hours:</label>
+                    <input type="number" name="durationHour" id="durationHour" class="addEventInput" min="0" max="47" placeholder="{{ event.duration.hour }}">
+                    <label for="durationMinutes">Minutes:</label>
+                    <input type="number" name="durationMinutes" id="durationMinutes" class="addEventInput" min="0" max="59" placeholder="{{ event.duration.minute }}">
+                    <br>
+
+                    <label for="capacity" class="bigLabel">Capacity (Min 1):</label><br>
+                    <input type="number" name="capacity" id="capacity" class="addEventInput" min="1" placeholder="{{ event.capacity }}"><br>
+
+                    <input type="submit" value="Change" class="submitAdd">
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

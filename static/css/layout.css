@@ -1,0 +1,739 @@
+body{
+    margin:0;
+    padding:0;
+    background-color: #121212;
+}
+
+h1{
+    font-family: "EB Garamond", serif;
+    text-align: center;
+    color: #FFFFFF;
+    opacity: 87%;
+    font-size: 500%;
+}
+
+h2{ 
+    font-family: "EB Garamond", serif;
+    text-align: center;
+    color: #FFFFFF;
+    opacity: 87%;
+    font-size: 300%;
+}
+
+h3{
+    font-family: "EB Garamond", serif;
+    text-align: center;
+    color: #FFFFFF;
+    opacity: 87%;
+    font-size: 200%;
+}
+
+.eventListItem h3{
+    color: #FFFFFF;
+    opacity: 60%;
+    font-size: 250%;
+    margin-top: 0;
+    position: relative;
+    text-align: center;
+    width: 75%;
+    margin-bottom: 2%;
+}
+
+h3.noEvents{
+    width: 100%;
+}
+
+h3.notification{
+    font-size: 200%;
+    margin-bottom: 0.5%;
+    margin-left: 12%;
+}
+
+h3.eventDetails{
+    font-size: 200%;
+    color: #FFFFFF;
+    opacity: 60%;
+    position: relative;
+    text-align: center;
+    margin-top: 2%;
+}
+
+h3.errorMessage{
+    font-size: 200%;
+    color: #b30000;
+    opacity: 60%;
+    position: relative;
+    text-align: center;
+    margin-top: 2%;
+}
+
+h3.attended{
+    font-size: 200%;
+    color: #00802b;
+    opacity: 60%;
+    position: relative;
+    text-align: center;
+    margin-top: 2%;
+}
+
+h3.ticketName{
+    font-size: 125%;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    color: black;
+    opacity: 87%;
+}
+
+p{
+    font-family: "EB Garamond", serif;
+    color: #FFFFFF;
+    opacity: 60%;
+    margin-bottom: 0.5%;
+}
+
+p.note{
+    text-align: center;
+    font-size: 110%;
+}
+
+p.bigNote{
+    text-align: center;
+    font-size: 150%;
+}
+
+p.errorMessage{
+    text-align: center;
+    font-size: 175%;
+    color: #b30000;
+    opacity: 87%;
+    font-weight: bold;
+
+}
+
+p.attended{
+    text-align: center;
+    font-size: 175%;
+    color: #00b33c !important;
+    opacity: 87% !important;
+    font-weight: bold;
+}
+
+.eventListItem p{
+    margin-top: 0;
+    color: #FFFFFF;
+    opacity: 60%;
+    position: relative;
+    text-align: center;
+    width: 75%;
+    font-size: 110%;
+}
+
+.eventListItem p.errorMessage{
+    margin: 0;
+    margin-top: 2%;
+    font-size: 110%;
+    color: #b30000;
+    opacity: 87%;
+    font-weight: bold;
+}
+
+p.dateOutput{
+    height: 100%;
+    width: 10%;
+    font-size: 100%;
+    text-align: center;
+    color: #FFFFFF;
+    opacity: 60%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-top: 1%;
+}
+
+p.ticketDetails{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 95%;
+    text-align: center;
+    color: black;
+    opacity: 67%;
+}
+
+a{
+    font-weight: bold;
+    color: #087cc4;
+    
+}
+
+a:visited{
+    color: #744f96;
+}
+
+.sideBar a{
+    padding: 1%;
+    font-size: 200%;
+    color: #FFFFFF;
+    opacity: 60%;
+    display: block;
+    position: relative;
+    text-decoration: none;
+}
+
+.sideBar a:hover{
+    opacity: 87%;
+}
+
+a.navLink{
+    margin-bottom: 10%;
+}
+
+a.navLink:before{
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #FFFFFF;
+    opacity: 87%;
+    visibility: hidden;
+    transition: all 0.3s ease-in-out;
+}
+
+a.navLink:hover:before {
+    visibility: visible;
+    width: 100%;
+}
+
+a.closeMenu{
+    position: absolute;
+    top: 0;
+    right: 5%;
+    font-size: 225%;
+    margin-left: 10%;
+    cursor: pointer;
+}
+
+label{
+    font-family: "EB Garamond", serif;
+    text-align: center;
+    color: #FFFFFF;
+    opacity: 60%;
+    font-size: 105%;
+}
+
+form.addEvent label{
+    font-family: "EB Garamond", serif;
+    display: inline;
+    color: #FFFFFF;
+    opacity: 60%;
+    font-size: 110%;
+}
+
+label.bigLabel{
+    font-family: "EB Garamond", serif;
+    text-align: center !important;
+    color: #FFFFFF !important;
+    opacity: 75% !important;
+    font-size: 140% !important;
+}
+
+.settings label{
+    font-size: 120%;
+}
+
+form.auth{
+    text-align: center;
+    font-family: "EB Garamond", serif;
+}
+
+form.addEvent{
+    text-align: center;
+    font-family: "EB Garamond", serif;
+}
+
+input.loginInput{
+    width: 80%;
+    margin-top: 1%;
+    margin-bottom: 2.5%;
+    font-family: "EB Garamond", serif;
+    text-align: center;
+}
+
+input.submitAuth{
+    padding: 1%;
+    font-size: medium;
+    font-family: "EB Garamond", serif;
+    color: #FFFFFF;
+    opacity: 60%;
+    background-color: #333333;
+    border: 0px;
+    border-radius: 25%;
+    float: right;
+    margin-right: 10%;
+}
+
+input.submitAuth:hover{
+    background-color: #4D4D4D;
+}
+
+input#newEventName{
+    width: 20%;
+    margin-top: 1%;
+    margin-bottom: 4%;
+    font-family: "EB Garamond", serif;
+    font-size: 115%;
+}
+
+input#startHour{
+    margin-bottom: 0;
+}
+
+input#startMinutes{
+    margin-bottom: 0;
+}
+
+input.submitAdd{
+    padding: 1%;
+    font-size: 150%;
+    font-family: "EB Garamond", serif;
+    color: #FFFFFF;
+    opacity: 87%;
+    background-color: #00802b;
+    border: 0px;
+    border-radius: 25px;
+    text-align: center;
+}
+
+input.submitAdd:hover{
+    background-color: #00b33c;
+}
+
+
+input.addEventInput{
+    margin-top: 1%;
+    margin-left: 0.5%;
+    margin-right: 2%;
+    margin-bottom: 2%;
+    width: 5%;
+    font-size: 115%;
+    text-align: center;
+    font-family: "EB Garamond", serif;
+}
+
+input.doNotifications{
+    margin-top: 1%;
+    margin-bottom: 2%;
+    cursor: pointer;
+}
+
+input.newpfp{
+    color: #FFFFFF;
+    opacity: 87%;
+    margin-left: 4%;
+    font-size: 100%;
+    font-family: "EB Garamond", serif;
+}
+
+button{
+    cursor: pointer;
+}
+
+button.openMenu{
+    font-size: 300%;
+    color: #FFFFFF;
+    opacity: 60%;
+    position: absolute;
+    top: 2%;
+    left: 2%;
+    background-color: #121212;
+    border: none;
+    z-index: 1;
+}
+
+button.openMenu:hover{
+    opacity: 87%;
+    background-color: #121212;
+}
+
+button.viewEvent{
+    height: 100%;
+    width: 25%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: #4D4D4D;
+    text-align: center;
+    border: none;
+    border-radius: 25px;
+    color: #FFFFFF;
+    opacity: 60%;
+    font-size: 150%;
+    font-family: "EB Garamond", serif;
+}
+
+button.viewEvent:hover{
+    background-color: #808080;
+}
+
+button.viewEvent:disabled{
+    opacity: 40%;
+    cursor: default;
+    background-color: #121212;
+}
+
+button.delete{
+    height: 100%;
+    width: 10%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: #4D4D4D;
+    text-align: center;
+    border: none;
+    border-radius: 25px;
+    color: #FFFFFF;
+    opacity: 60%;
+    font-size: 200%;
+}
+
+button.delete:hover{
+    background-color: #808080;
+}
+
+button#viewEvent{
+    height: 50%;
+}
+
+button#viewTicket{
+    height: 50%;
+    top: 50%;
+}
+
+button.edit{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: #000099;
+    color: #FFFFFF;
+    opacity: 87%;
+    padding: 1%;
+    padding-top: 0.5%;
+    font-family: "EB Garamond", serif;
+    font-size: 150%;
+    border-radius: 50px;
+    border: none;
+    box-shadow: none;
+    overflow: hidden;
+}
+
+button.edit:hover{
+    background-color: #0000cc;
+}
+
+button.cancel{
+    border: 4px solid #800000;
+    background-color: #800000;
+    color: #FFFFFF;
+    opacity: 87%;
+    padding: 2%;
+    font-family: "EB Garamond", serif;
+    font-size: 200%;
+    border-radius: 25px;
+    box-shadow: none;
+    height: 100%;
+    width: 25%;
+    margin-left: 10%;
+    overflow: hidden;
+}
+
+button.cancel:hover{
+    background-color: #b30000;
+}
+
+button.uncancel{
+    border: 4px solid #800000;
+    background-color: inherit;
+    color: #800000;
+    opacity: 87%;
+    padding: 2%;
+    font-family: "EB Garamond", serif;
+    font-size: 200%;
+    border-radius: 25px;
+    box-shadow: none;
+    height: 100%;
+    width: 25%;
+    margin-left: 10%;
+    overflow: hidden;
+}
+
+button.uncancel:hover{
+    background-color: #262626;
+}
+
+button.viewTicket{
+    margin-right: 0;
+    position: absolute;
+    height: 100%;
+    right: 27.5%;
+    width: 17.5%;
+    box-shadow: none;
+    border-radius: 25px 0 0 25px;
+    font-size: 200%;
+    font-family: "EB Garamond", serif;
+    padding: 2%;
+    padding-top: 1%;
+    border: 4px solid #00802b;
+    background-color: #00802b;
+    color: #FFFFFF;
+    opacity: 87%;
+    overflow: hidden;
+}
+
+button.viewTicket:hover{
+    background-color: #00b33c;
+}
+
+button.cancelTicket{
+    margin-left: 0;
+    position: absolute;
+    height: 100%;
+    right: 10%;
+    width: 17.5%;
+    box-shadow: none;
+    border-radius: 0 25px 25px 0;
+    font-size: 200%;
+    font-family: "EB Garamond" serif;
+    padding: 2%;
+    padding-top: 1%;
+    border: 4px solid #800000;
+    background-color: inherit;
+    color: #800000;
+    opacity: 87%;
+    overflow: hidden;
+}
+
+button.cancelTicket:hover{
+    background-color: #262626;
+}
+
+button.getTicket{
+    border: 4px solid #00802b;
+    background-color: #00802b;
+    color: #FFFFFF;
+    opacity: 87%;
+    padding: 2%;
+    font-family: "EB Garamond", serif;
+    font-size: 200%;
+    border-radius: 25px;
+    box-shadow: none;
+    height: 100%;
+    width: 25%;
+    overflow: hidden;
+    position: absolute;
+    right: 10%;
+}
+
+button.getTicket:hover{
+    background-color: #00b33c;
+}
+
+button.attended{
+    border: 4px solid #00802b;
+    background-color: #00802b;
+    color: #FFFFFF;
+    opacity: 87%;
+    padding: 2%;
+    font-family: "EB Garamond", serif;
+    font-size: 200%;
+    border-radius: 25px;
+    box-shadow: none;
+    height: 100%;
+    width: 25%;
+    overflow: hidden;
+    position: absolute;
+    display: block;
+    margin-left: 37.5%;
+}
+
+button.attended:hover{
+    background-color: #00b33c;
+}
+
+button.changePassword{
+    padding: 1%;
+    font-size: 150%;
+    font-family: "EB Garamond", serif;
+    color: #FFFFFF;
+    opacity: 87%;
+    background-color: #4D4D4D;
+    border: 0px;
+    border-radius: 25px;
+    text-align: center;
+    margin-bottom: 2%;
+}
+
+button.changePassword:hover{
+    background-color: #808080;
+}
+
+button.resetDb{
+    padding: 1%;
+    font-size: 150%;
+    font-family: "EB Garamond", serif;
+    color: #FFFFFF;
+    opacity: 87%;
+    background-color: #800000;
+    border: 0px;
+    border-radius: 25px;
+    text-align: center;
+    margin-bottom: 2%;
+}
+
+button.resetDb:hover{
+    background-color: #b30000;
+}
+
+button.logout{
+    padding: 1%;
+    font-size: 150%;
+    font-family: "EB Garamond", serif;
+    color: #FFFFFF;
+    opacity: 87%;
+    background-color: #4D4D4D;
+    border: 0px;
+    border-radius: 25px;
+    text-align: center;
+    margin-bottom: 2%;
+}
+
+button.logout:hover{
+    background-color: #808080;
+}
+
+img.ticketBarcode{
+    object-fit: contain;
+    width: 100%;
+}
+
+img.settingspfp{
+    width: 10%;
+}
+
+img.pfp{
+    z-index: 1;
+    position: fixed;
+    top: 2%;
+    right: 2%;
+    width: 5%;
+}
+
+.contentWrapper{
+    width: 100%;
+    height: fit-content;
+}
+
+.authForm{
+    width: 75%;
+    border: 4px solid #F6F6F6;
+    border-radius: 10%;
+    margin: auto;
+    padding: 1%;
+}
+
+.sideBar{
+    height: 100%;
+    width: 0%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: black;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 5%;
+    margin-right: 10%;
+}
+
+#loginContent{
+    position: absolute;
+}
+
+.eventListItem{
+    position: relative;
+    display: block;
+    width: 90%;
+    margin-left: 5%;
+    background-color: #4D4D4D;
+    transition: 0.5s;
+    border-radius: 25px;
+    padding: 2%;
+    margin-top: 2%;
+}
+
+.notificationList div.eventListItem{
+    padding: 0.5%;
+}
+
+.hidden{
+    width: 0; 
+    height: 0; 
+    overflow: hidden; 
+    background: none; 
+    margin: 0; 
+    padding: 0;
+}
+
+.editButton{
+    position: absolute;
+    top: 2.5%;
+    right: 2%;
+    height: 10%;
+    width: 15%;
+    background-color: inherit;
+    z-index: 1;
+}
+
+.bottomButtons{
+    position: absolute;
+    bottom: 10%;
+    height: 15%;
+    width: 100%;
+    background-color: inherit;
+}
+
+.addEventForm{
+    width: 60%;
+    border: 4px solid #F6F6F6;
+    border-radius: 25px;
+    margin: auto;
+    padding: 1%;
+}
+
+.ticket{
+    background-color: #FFFFFF;
+    height: 30%;
+    width: 15%;
+    padding: 1%;
+    border: 1px solid black;
+    box-shadow: 10px 10px black;
+    display: block;
+    position: absolute;
+    left: 40%;
+    top: 10%;
+}
+
+.image{
+    height: 20%;
+    width: 100%;
+    border-top: 3px dotted black;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    display: inline;
+}
+
+.settings{
+    text-align: center;
+}

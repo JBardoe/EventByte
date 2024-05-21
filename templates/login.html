@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Login</title>
+        <link rel="stylesheet" href="/static/css/layout.css" type="text/css">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    </head>
+    <body>
+        <div class="contentWrapper" id="loginContent">
+            <!-- Headings -->
+            <h1>Welcome to EventByte</h1>
+            <h2>Please Login</h2>
+
+            <!-- Link to registration -->
+            <p class="note">New?   <a href="/register">Create an Account!</a></p>
+
+            <!-- Form to log in -->
+            <div class="authForm">
+                <form class="auth" action="login" method="POST">
+                    <label for="email">Email:</label><br>
+                    <input type="email" name="email" id="email" class="loginInput" required><br>
+                    <label for="password">Password: </label> <br>
+                    <input type="password" name="password" id="password" class="loginInput" required><br>
+                    <input type="submit" value="Submit" class="submitAuth">
+                </form><br><br><br>
+
+                <!-- Display any error messages e.g.rejected login -->
+                {% for message in get_flashed_messages() %}
+                    <p class="errorMessage">{{ message }}</p>
+                {% endfor %}
+
+                <!-- Link to reset password -->
+                <p class="note"><a href="/resetPassword">Forgot Password?</a></p>
+            </div>
+
+            <!-- Link to view events without logging in -->
+            <p class="bigNote">Or <a href="/allEvents">continue without an account?</a> </p>
+        </div>
+    </body>
+</html>

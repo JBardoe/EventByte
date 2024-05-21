@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Register</title>
+        <link rel="stylesheet" href="/static/css/layout.css" type="text/css">
+        <script src='/static/js/jquery-3.7.1.min.js'></script>
+        <script src='/static/js/register.js'></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    </head>
+    <body>
+        <div class="contentWrapper">
+            <h1>Register</h1>
+            <!-- Display any error messages -->
+            {% for message in get_flashed_messages() %}
+                <p class="errorMessage">{{ message }}</p>
+            {% endfor %}
+
+            <!-- Link to login -->
+            <p class="note">Already have an account?  <a href="/login">Login!</a></p>
+            
+            <!-- Form to register new user -->
+            <div class="authForm">
+                <form action="register"  onsubmit="return validateRegister();" class="auth" method="POST">
+                    <label for="fname">First Name:</label><br>
+                    <input type="text" name="fname" id="fname" class="loginInput" required><br>
+                    <label for="lname">Surname:</label><br>
+                    <input type="text" name="lname" id="lname" class="loginInput" required><br>
+                    <label for="email">Email:</label><br>
+                    <input type="email" name="email" id="email" class="loginInput" required><br>
+                    <label for="password">Password: </label> <br>
+                    <input type="password" name="password" id="password" class="loginInput" required minlength="8"><br> <!-- Password is minimum 8 characters and must match the confirm (checked with javascript) -->
+                    <label for="confirmPassword">Confirm Password: </label><br>
+                    <input type="password" name="confirmPassword" id="confirmPassword" class="loginInput" required minlength="8"><br>
+                    <input type="submit" value="Submit" class="submitAuth"><br><br>
+                </form>
+            </div>
+            <!-- Link to view events without logging in -->
+            <p class="bigNote">Or <a href="/allEvents">continue without an account?</a> </p>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{{ event.name }} Ticket</title>
+        <link rel="stylesheet" href="/static/css/layout.css" type="text/css">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    </head>
+    <body>
+        <!-- Display the ticket details with its barcode -->
+        <div class="contentWrapper" id="ticket">
+            <div class="ticket">
+                <h3 class="ticketName">{{ event.name }}</h3>
+                <p class="ticketDetails">{{ event.getFormattedDate() }}</p>
+                <p class="ticketDetails">{{ event.getFormattedDuration() }}</p>
+                <div class="image">
+                    <img class="ticketBarcode" src="{{ barcode }}" alt="Barcode">
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

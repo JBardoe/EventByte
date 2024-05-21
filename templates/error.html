@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Error</title>
+        <link rel="stylesheet" href="/static/css/layout.css" type="text/css">
+        <script src='/static/js/jquery-3.7.1.min.js'></script>
+        <script src='/static/js/events.js'></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    </head>
+    <body>
+        <div class="contentWrapper">
+            <!--Side navigation bar-->
+            <button class="openMenu" type="button" id="openMenu" onclick="openMenu();">&#9776;</button>
+            <div class="sideBar" id="menu">
+                <a class="closeMenu" onclick="closeMenu()">&times;</a>
+                <a class="navLink" href="/login">Return to Login</a>
+            </div>
+
+            <!-- Display the error -->
+            <h3 class="errorMessage">{{ error }}</h3>
+        </div>
+    </body>
+</html>

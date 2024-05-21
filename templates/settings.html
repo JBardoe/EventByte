@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Settings</title>
+        <link rel="stylesheet" href="/static/css/layout.css" type="text/css">
+        <script src='/static/js/jquery-3.7.1.min.js'></script>
+        <script src='/static/js/events.js'></script>
+        <script src='/static/js/settings.js'></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    </head>
+    <body>
+        <div class="contentWrapper">
+            <!--Side navigation bar-->
+            <button class="openMenu" type="button" id="openMenu" onclick="openMenu();">&#9776;</button>
+            <div class="sideBar" id="menu">
+                <a class="closeMenu" onclick="closeMenu()">&times;</a>
+                <a class="navLink" href="/myEvents">My Events</a>
+                <a class="navLink" href="/allEvents">Upcoming Events</a>
+                <a class="navLink" href="/allEvents?past=True">Past Events</a>
+                <a class="navLink" href="/notifications">Notifications</a>
+                {% if user.id == 1 %}
+                    <a class="navLink" href="/addEvent">Add Event</a>
+                    <a class="navLink" href="/situationLog">Log</a>
+                {% endif %}
+                <a class="navLink" href="/logout">Logout</a>
+            </div>
+
+
+            <h2>Settings</h2>
+            <!-- Display any error messages -->
+            {% for message in get_flashed_messages() %}
+                <p class="errorMessage">{{ message }}</p>
+            {% endfor %}
+
+            <div class="settings">
+
+                <!-- Input to change profile picture -->
+                <img src="{{ pfp }}" alt="Profile Picture" name="profilePicture" id="profilePicture" class="settingspfp"><br><br>
+                <label for="newpfp">Change Profile Picture?</label><br><br>
+                <form action='changeProfilePicture' id="newpfp" method='POST' enctype="multipart/form-data"><input type="file" class="newpfp" id="newpfp" name="newpfp" accept="image/jpeg"></form><br>
+                <button type="submit" class="logout" id="submitPfp" form="newpfp">Submit</button><br>
+
+                <!-- Button to change user password -->
+                <form action="settings" method='POST' hidden id="passwordChange"></form>
+                <button type="submit" class="changePassword" id="changePassword" form="passwordChange">Change Password</button><br>
+
+                <!-- Button to toggle whether the user receives notifications -->
+                <label for="doNotification">Receive Notifications?</label><br>
+                <input class="doNotifications" type="checkbox" {% if user.doNotifications %} checked {% endif %} name="doNotifications" id="doNotifications" onclick="toggleNotifications();"><br>
+
+                <!-- Button for super user to reset the database -->
+                {% if user.id == 1 %}
+                    <button type="submit" class="resetDb" id="resetDb" onclick="return resetDb();">Reset Database</button>
+                {% endif %}
+                <br>
+                <!-- Button to log out -->
+                <a href="/logout">
+                    <button type="submit" class="logout" id="logout">Logout</button>
+                </a>
+            </div>
+        </div>
+    </body>
+</html>

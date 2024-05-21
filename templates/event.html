@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>{{ event.name }}</title>
+        <link rel="stylesheet" href="/static/css/layout.css" type="text/css">
+        <script src='/static/js/jquery-3.7.1.min.js'></script>
+        <script src='/static/js/events.js'></script>
+        <script src='/static/js/eventPage.js'></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    </head>
+    <body>
+        <div class="contentWrapper">
+            <!--Side navigation bar-->
+            <button class="openMenu" type="button" id="openMenu" onclick="openMenu();">&#9776;</button>
+            <div class="sideBar" id="menu">
+                <a class="closeMenu" onclick="closeMenu()">&times;</a>
+                {% if userId == -1 %}
+                    <a class="navLink" href="/login">Login</a>
+                    <a class="navLink" href="/register">Register</a>
+                    <a class="navLink" href="/allEvents">Upcoming Events</a>
+                    <a class="navLink" href="/allEvents?past=True">Past Events</a>
+                {% else %}
+                    <a class="navLink" href="/myEvents">My Events</a>
+                    <a class="navLink" href="/allEvents">Upcoming Events</a>
+                    <a class="navLink" href="/allEvents?past=True">Past Events</a>
+                    <a class="navLink" href="/notifications">Notifications</a>
+                    {% if userId == 1 %}
+                        <a class="navLink" href="/addEvent">Add Event</a>
+                        <a class="navLink" href="/situationLog">Log</a>
+                    {% endif %}
+                    <a class="navLink" href="/settings">Settings</a>
+                    <a class="navLink" href="/logout">Logout</a>
+                {% endif %}
+            </div>
+
+            <!-- Allow the super user to edit anny upcoming events -->
+            {% if userId == 1 and not isPast %}
+                <div class="editButton">
+                    <a href="/editEvent?event={{ event.name }}">
+                        <button class="edit" id="edit" type="button">Edit</button>
+                    </a>
+                </div>
+            {% endif %}
+
+            <div class="eventDetails">
+                <!-- Display event details -->
+                <h2>{{ event.name }}</h2>
+                <h3>At {{ event.getFormattedDate() }}</h3>
+                <h3>Duration: {{ event.getFormattedDuration() }}</h3>
+                <h3>Capacity: {{ event.capacity }} {% if event.capacity > 1 %}people{% else %}person{% endif %}</h3>
+                
+                <!-- Warn if the event is: passed, cancelled, near capacity, or full  -->
+                {% if isPast %}
+                    <h3 class="errorMessage">This event has passed.</h3>
+                {% endif %}
+                {% if hasTicket %}
+                    {% if not event.active %}
+                        <h3 class="errorMessage">This event was cancelled.</h3>
+                {% endif %}
+                {% elif not event.active %}
+                    <h3 class="errorMessage">This event was cancelled so tickets cannot be bought</h3>
+                {% elif event.warning %}
+                    {% if event.getRemainingTickets() == 1 %}
+                        <h3 class="errorMessage">There is only 1 ticket remaining.</h3>
+                    {% else %}
+                        <h3 class="errorMessage">There are only {% print(event.getRemainingTickets()) %} tickets remaining.</h3>
+                    {% endif %}
+                {% elif event.full %}
+                    <h3 class="errorMessage">There are no tickets remaining</h3>
+                {% endif %}
+                <!-- Warn if email is not verified -->
+                {% if emailVerified == 0 %}
+                    <h3 class="errorMessage">Please verify your email in order to buy tickets</h3>
+                {% endif %}
+
+                <!-- Display if a past event was attended -->
+                <h3 class="attended" id="attendedMessage" {% if not attended %} hidden {% endif %}>This event was attended.</p>
+            </div>
+            
+            <!-- Only verified users can get tickets and only for upcoming events -->
+            {% if userId != -1 and emailVerified == 1%}
+            <div class="bottomButtons">
+                <!-- Allow super user to cancel and uncancel upcoming events -->
+                {% if userId == 1 and event.active and not isPast %}
+                    <button class="cancel" type="button" onclick="return cancelEvent();" id="cancelButton">Cancel</button>
+                {% elif userId == 1 and not isPast%}
+                    <button class="uncancel" type="button" onclick="return uncancelEvent();" id="cancelButton">Uncancel</button>
+                {% endif %}
+
+                <!-- Hidden form with ticket and user ids so the data can be sent alongside the links -->
+                <form hidden id="ticketIds">
+                    <input type="hidden" id="userId" name="userId" value="{{ userId }}">
+                    <input type="hidden" id="eventId" name="eventId" value="{{ event.id }}">
+                </form>
+
+                <!-- Allow the users to buy, view, and cancel tickets -->
+                {% if event.active and not isPast %}
+                    <a href="/viewTicket?eventId={{ event.id }}" target="_blank">
+                        <button class="viewTicket" id="viewEventTicket" type="submit" {% if not hasTicket %} hidden {% endif %}>View Ticket</button>
+                    </a>
+                    <button class="cancelTicket" id="cancelTicket" type="button" onclick="return cancelTicket();" {% if not hasTicket %} hidden {% endif %}>Cancel Ticket</button>
+                    {% if not event.full %}
+                        <button class="getTicket" id="getTicket" type="button" onclick="return getTicket();" {% if hasTicket %} hidden {% endif %}>Get Ticket</button>
+                    {% endif %}
+                {% endif %}
+                
+                <!-- Allow the user to say they attended an event -->
+                {% if isPast and hasTicket and not attended%}
+                    <button class="attended" id="attended" type="button" onclick="return registerAttendance();">Attended?</button>
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+    </body>
+</html>
+

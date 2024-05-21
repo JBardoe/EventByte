@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Notifications</title>
+        <link rel="stylesheet" href="/static/css/layout.css" type="text/css">
+        <script src='/static/js/jquery-3.7.1.min.js'></script>
+        <script src='/static/js/events.js'></script>
+        <script src='/static/js/notifications.js'></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    </head>
+    <body>
+        <div class="contentWrapper">
+            <!--Side navigation bar-->
+            <button class="openMenu" type="button" id="openMenu" onclick="openMenu();">&#9776;</button>
+            <div class="sideBar" id="menu">
+                <a class="closeMenu" onclick="closeMenu()">&times;</a>
+                <a class="navLink" href="/myEvents">My Events</a>
+                <a class="navLink" href="/allEvents">Upcoming Events</a>
+                <a class="navLink" href="/allEvents?past=True">Past Events</a>
+                {% if isSuperUser %}
+                    <a class="navLink" href="/addEvent">Add Event</a>
+                    <a class="navLink" href="/situationLog">Log</a>
+                {% endif %}
+                <a class="navLink" href="/settings">Settings</a>
+                <a class="navLink" href="/logout">Logout</a>
+            </div>
+
+            <!-- Display the profile picture -->
+            <img class="pfp" alt="Profile Picture" src="{{ pfp }}" name="profilePicture" id="profilePicture">
+
+            <h2>Notifications</h2>
+            <!-- Display all user notifications -->
+            <div class="notificationList">
+                {% for notification in notifications %}
+                    <!-- Display details of every notification -->
+                    <div class="eventListItem" id="{{ notification.id }}">
+                        <p class="dateOutput">{{ notification.getFormattedDate()[0] }}<br>{{ notification.getFormattedDate()[1] }}</p>
+                        <h3 class="notification">{{ notification.notification }}</h3>
+
+                        <!-- Button to delete the notification -->
+                        <button class="delete" type="submit" onclick="return deleteNotification('{{ notification.id }}');">&times;</button>
+                    </div>
+                    <!-- Display if all notifications have been deleted (shown using JavaScript) -->
+                    <div class="hidden" style="transition:0s;" id="deletedAllNotifications">
+                        <h3 class="noEvents">No notifications.</h3>
+                    </div>
+                <!-- Display if there are no notifications -->
+                {% else %}
+                    <div class="eventListItem">
+                        <h3 class="noEvents">No notifications.</h3>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </body>
+</html>

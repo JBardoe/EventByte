@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>My Events</title>
+        <link rel="stylesheet" href="/static/css/layout.css" type="text/css">
+        <script src='/static/js/jquery-3.7.1.min.js'></script>
+        <script src='/static/js/events.js'></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    </head>
+    <body>
+        <div class="contentWrapper">
+            <!--Side navigation bar-->
+            <button class="openMenu" type="button" id="openMenu" onclick="openMenu();">&#9776;</button>
+            <div class="sideBar" id="menu">
+                <a class="closeMenu" onclick="closeMenu()">&times;</a>
+                <a class="navLink" href="/allEvents">Upcoming Events</a>
+                <a class="navLink" href="/allEvents?past=True">Past Events</a>
+                <a class="navLink" href="/notifications">Notifications</a>
+                {% if isSuperUser %}
+                    <a class="navLink" href="/addEvent">Add Event</a>
+                    <a class="navLink" href="/situationLog">Log</a>
+                {% endif %}
+                <a class="navLink" href="/settings">Settings</a>
+                <a class="navLink" href="/logout">Logout</a>
+            </div>
+
+            <!-- Display the profile picture -->
+            <img class="pfp" alt="Profile Picture" src="{{ pfp }}" name="profilePicture" id="profilePicture">
+
+            <h2>My Events</h2>
+            <!-- Display all events the user has tickets for -->
+            <div class="eventList">
+                {% for event in events %}
+                    <div class="eventListItem" {% if event.active == False %}style="background-color: #333333;" {% endif %}>
+                        <h3>{{ event.name }}</h3>
+                        <p>{{ event.getFormattedDate() }}</p>
+                        
+                        <!-- Display if the event was attended -->
+                        {% if (event.id in attendedIds) and event.active %}
+                            <p class="attended">This event was attended</p>
+                        {% endif %}
+
+                        <!-- Link to view the event's page -->
+                        <a href="/event?event={{ event.name }}">
+                            <button type="submit" class="viewEvent" id="viewEvent">View Event</button>
+                        </a> 
+
+                        <!-- Link to view the user's ticket -->
+                        <a href="/viewTicket?eventId={{ event.id }}" target="_blank">
+                            <button type="submit" class="viewEvent" id="viewTicket" target="_blank" {% if event.active == False %} disabled {% endif %}>View Ticket</button> <!-- Disable button if event is cancelled -->
+                        </a> 
+
+                        <!-- Display if the event has been cancelled -->
+                        {% if event.active == False %}
+                            <p class="errorMessage">This event has been cancelled!</p>
+                        {% endif %}
+                    </div>
+                <!-- Display if the user has no events -->
+                {% else %}
+                    <div class="eventListItem">
+                        <h3 class="noEvents">You have not signed up to any events yet.</h3>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </body>
+</html>
